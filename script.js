@@ -11,6 +11,44 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: .08, rootMargin: '0px 0px -30px' });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+// Visual fixes: consistent avatars, play icon and simplified plan area.
+const uiFixStyles = document.createElement('style');
+uiFixStyles.textContent = `
+.person-avatar,.teacher-avatar{background:#fff4f6!important;display:grid!important;place-items:center!important;background-image:none!important;overflow:hidden}
+.avatar-svg{width:46%;max-width:116px;height:auto;fill:#df7187}
+.teacher-avatar .avatar-svg{width:42%;max-width:150px}
+.price-footer{display:block!important;margin-top:0!important}
+.price-details,.trial-price-cta{display:none!important}
+.price-notes{display:flex;gap:12px 24px;flex-wrap:wrap;margin-top:18px;padding:0 2px;color:rgba(255,255,255,.62);font-size:13px}
+.price-notes span{position:relative;padding-left:14px}.price-notes span::before{content:'•';position:absolute;left:0;color:#c06a7f}
+.trial-question{margin-top:26px;padding:26px 0 0;border-top:1px solid rgba(255,255,255,.13);display:flex;align-items:center;justify-content:space-between;gap:28px}
+.trial-question small{display:block;font:800 9px/1 Manrope,sans-serif;letter-spacing:.18em;color:#ef9caf;margin-bottom:10px}
+.trial-question strong{display:block;font:700 26px/1.1 Manrope,sans-serif;letter-spacing:-.04em}
+.trial-question p{margin:8px 0 0;color:rgba(255,255,255,.62);font-size:14px;line-height:1.6}
+.trial-question a{flex:0 0 auto;display:flex;align-items:center;gap:16px;padding:16px 18px;border-radius:16px;background:#fff;color:#0d0d12;font-size:14px;font-weight:800;transition:.22s}
+.trial-question a:hover{transform:translateY(-2px);background:#f7eef1}
+@media(max-width:760px){.trial-question{align-items:flex-start;flex-direction:column}.trial-question a{width:100%;justify-content:space-between}}
+`;
+document.head.appendChild(uiFixStyles);
+
+const teamPlay = document.querySelectorAll('.showcase-play')[2];
+if (teamPlay) teamPlay.textContent = '▶';
+
+const priceFooter = document.querySelector('.price-footer');
+if (priceFooter) {
+  priceFooter.innerHTML = `
+    <div class="price-notes">
+      <span>Aula experimental gratuita</span>
+      <span>Inscrição: 30€</span>
+      <span>Seguro anual: aprox. 12,50€</span>
+      <span>-10% para mães com filhos inscritos</span>
+    </div>
+    <div class="trial-question">
+      <div><small>AINDA COM DÚVIDAS?</small><strong>Experimenta uma aula antes de escolher o plano.</strong><p>Conhece o estúdio, sente a dinâmica da aula e decide depois — sem compromisso.</p></div>
+      <a href="https://wa.me/351931486405?text=Olá%20FIARY!%20Quero%20marcar%20uma%20aula%20experimental%20gratuita." target="_blank" rel="noopener">Marcar aula experimental <b>↗</b></a>
+    </div>`;
+}
+
 const filterButtons = document.querySelectorAll('.filters button');
 const modalityCards = document.querySelectorAll('.modality');
 filterButtons.forEach(btn => btn.addEventListener('click', () => {
@@ -30,13 +68,8 @@ if (teamHeroImg) {
 
 document.querySelectorAll('.person-photo').forEach(photo => {
   photo.className = 'person-photo person-avatar';
-  photo.innerHTML = '<span class="avatar-icon" aria-hidden="true"></span>';
+  photo.innerHTML = '<svg class="avatar-svg" viewBox="0 0 120 140" aria-hidden="true" focusable="false"><circle cx="60" cy="38" r="24"></circle><path d="M18 124c0-31 18-51 42-51s42 20 42 51v6H18z"></path></svg>';
 });
-
-const avatarStyles = document.createElement('style');
-avatarStyles.textContent = `
-.person-avatar,.teacher-avatar{background:linear-gradient(145deg,#d78397,#b85f75)!important;display:grid!important;place-items:center!important;position:relative;overflow:hidden;background-image:none!important}.person-avatar::before,.teacher-avatar::before{content:"";position:absolute;width:72%;aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.08);top:-22%;right:-16%}.avatar-icon{position:relative;width:46%;max-width:110px;aspect-ratio:1/1.15}.avatar-icon::before{content:"";position:absolute;left:50%;top:5%;transform:translateX(-50%);width:42%;aspect-ratio:1;border-radius:50%;background:#fff}.avatar-icon::after{content:"";position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:82%;height:50%;border-radius:60px 60px 24px 24px;background:#fff}.modality{cursor:default!important}`;
-document.head.appendChild(avatarStyles);
 
 const teachers = {
   mafalda: {
@@ -66,7 +99,7 @@ function profileHTML(key, modal = false) {
   const t = teachers[key] || teachers.equipa;
   return `
     <div class="${modal ? 'modal-profile' : 'teacher-profile'}">
-      <div class="teacher-photo teacher-avatar"><span class="avatar-icon" aria-hidden="true"></span></div>
+      <div class="teacher-photo teacher-avatar"><svg class="avatar-svg" viewBox="0 0 120 140" aria-hidden="true" focusable="false"><circle cx="60" cy="38" r="24"></circle><path d="M18 124c0-31 18-51 42-51s42 20 42 51v6H18z"></path></svg></div>
       <div class="teacher-info">
         <span>${t.role}</span>
         <h3>${t.name}</h3>
