@@ -62,9 +62,10 @@ filterButtons.forEach(btn => btn.addEventListener('click', () => {
 }));
 
 const teamHeroImg = document.querySelector('.team-hero img');
-if (teamHeroImg) {
-  teamHeroImg.src = 'https://storage.googleapis.com/msgsndr/djC46eaXX3eZ2g3YLF8o/media/65a4cd852aaf1b8594074ba4.jpeg';
-}
+if (teamHeroImg) teamHeroImg.src = 'equipa.jpg';
+
+const teamShowcaseImg = document.querySelector('.showcase-card[href="#equipa"] img');
+if (teamShowcaseImg) teamShowcaseImg.src = 'equipa.jpg';
 
 document.querySelectorAll('.person-photo').forEach(photo => {
   photo.className = 'person-photo person-avatar';
