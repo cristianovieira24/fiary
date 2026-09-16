@@ -23,13 +23,9 @@ filterButtons.forEach(btn => btn.addEventListener('click', () => {
   });
 }));
 
-
-
-// Presentation fallbacks for the prototype: keep the team visual meaningful and
-// avoid fake teacher photos until FIARY supplies the real portraits.
 const teamHeroImg = document.querySelector('.team-hero img');
 if (teamHeroImg) {
-  teamHeroImg.src = 'https://images.pexels.com/photos/6926541/pexels-photo-6926541.jpeg?auto=compress&dpr=1&h=900&w=1600';
+  teamHeroImg.src = 'https://storage.googleapis.com/msgsndr/djC46eaXX3eZ2g3YLF8o/media/65a4cd852aaf1b8594074ba4.jpeg';
 }
 
 document.querySelectorAll('.person-photo').forEach(photo => {
@@ -46,21 +42,21 @@ const teachers = {
   mafalda: {
     name: 'Mafalda Morgado',
     role: 'Direção artística · Professora · Coreógrafa',
-    bio: 'Formada na Academia de Dança Contemporânea de Setúbal, com experiência em palco e projetos internacionais. Na FIARY, está ligada à direção artística e ao ensino.',
+    bio: 'À frente da direção artística, acompanha o crescimento dos alunos com uma abordagem que combina técnica, expressão e confiança. Em cada aula, o objetivo é evoluir sem perder o prazer de dançar.',
     photoClass: 'teacher-mafalda',
     msg: 'Olá FIARY! Quero experimentar uma aula com a Mafalda.'
   },
   tiago: {
     name: 'Tiago Luz',
     role: 'Professor · Dança urbana / performance',
-    bio: 'Professor associado às atuações e dinâmicas de palco da escola. Um perfil adequado para modalidades mais performativas e de linguagem urbana.',
+    bio: 'Nas aulas, trabalha presença, musicalidade e performance, ajudando cada aluno a ganhar segurança e a desenvolver a sua própria forma de se mover.',
     photoClass: 'teacher-tiago',
     msg: 'Olá FIARY! Quero saber mais sobre uma aula com o Tiago.'
   },
   equipa: {
     name: 'Equipa FIARY',
     role: 'Professores especializados por modalidade',
-    bio: 'A FIARY trabalha com diferentes professores e linguagens. Na versão final, esta área pode receber fotografia, experiência, especialidades e horários de cada professor.',
+    bio: 'Cada modalidade é acompanhada por um professor preparado para orientar a turma de forma próxima, adaptar a aula ao nível dos alunos e criar um ambiente onde é possível aprender com confiança.',
     photoClass: 'teacher-equipa',
     msg: 'Olá FIARY! Quero saber quem é o professor desta modalidade e experimentar uma aula.'
   }
