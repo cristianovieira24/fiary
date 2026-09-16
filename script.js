@@ -23,12 +23,24 @@ filterButtons.forEach(btn => btn.addEventListener('click', () => {
   });
 }));
 
-modalityCards.forEach(card => {
-  card.addEventListener('click', e => {
-    if (e.target.closest('a,button')) return;
-    if (card.dataset.href) window.open(card.dataset.href, '_blank', 'noopener');
-  });
+
+
+// Presentation fallbacks for the prototype: keep the team visual meaningful and
+// avoid fake teacher photos until FIARY supplies the real portraits.
+const teamHeroImg = document.querySelector('.team-hero img');
+if (teamHeroImg) {
+  teamHeroImg.src = 'https://images.pexels.com/photos/6926541/pexels-photo-6926541.jpeg?auto=compress&dpr=1&h=900&w=1600';
+}
+
+document.querySelectorAll('.person-photo').forEach(photo => {
+  photo.className = 'person-photo person-avatar';
+  photo.innerHTML = '<span class="avatar-icon" aria-hidden="true"></span>';
 });
+
+const avatarStyles = document.createElement('style');
+avatarStyles.textContent = `
+.person-avatar,.teacher-avatar{background:linear-gradient(145deg,#d78397,#b85f75)!important;display:grid!important;place-items:center!important;position:relative;overflow:hidden;background-image:none!important}.person-avatar::before,.teacher-avatar::before{content:"";position:absolute;width:72%;aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.08);top:-22%;right:-16%}.avatar-icon{position:relative;width:46%;max-width:110px;aspect-ratio:1/1.15}.avatar-icon::before{content:"";position:absolute;left:50%;top:5%;transform:translateX(-50%);width:42%;aspect-ratio:1;border-radius:50%;background:#fff}.avatar-icon::after{content:"";position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:82%;height:50%;border-radius:60px 60px 24px 24px;background:#fff}.modality{cursor:default!important}`;
+document.head.appendChild(avatarStyles);
 
 const teachers = {
   mafalda: {
@@ -58,7 +70,7 @@ function profileHTML(key, modal = false) {
   const t = teachers[key] || teachers.equipa;
   return `
     <div class="${modal ? 'modal-profile' : 'teacher-profile'}">
-      <div class="teacher-photo ${t.photoClass}"></div>
+      <div class="teacher-photo teacher-avatar"><span class="avatar-icon" aria-hidden="true"></span></div>
       <div class="teacher-info">
         <span>${t.role}</span>
         <h3>${t.name}</h3>
